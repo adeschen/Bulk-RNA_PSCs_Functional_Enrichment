@@ -4,7 +4,12 @@ This capsule contains the functional enrichment analysis conducted on the
 bulk RNA-seq PSCs from 
 [Mucciolo et al. 2024](https://doi.org/10.1016/j.ccell.2023.12.002) for the 
 manuscript TODO.
- 
+
+More specifically, the data used in this analysis is from:
+
+- *Table S1.* RNA-sequencing analysis of control-treated or TGF-b-treated PSCs - differential expression analysis (related to Figure 1).
+- *Table S2.* RNA-sequencing analysis of control-treated or CM-treated PSCs with or without ERBBi - differential expression analysis(related to Figures 2 and 3). 
+
 ### Code, Data, Results
 All associated code is provided in the *code* directory.
 
