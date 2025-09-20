@@ -12,11 +12,11 @@ library(stringr)
 ################################################################################
 
 ## Load the data from the differential expression TGFbeta versus control
-dataTGF <- read.csv("./data/DEG_TGF_vs_control_from_Mucciolo_TableS1.csv",
+dataTGF <- read.csv("../data/DEG_TGF_vs_control_from_Mucciolo_TableS1.csv",
                     header=T, stringsAsFactors = F)
 
 ## Load the data from the differential expression CM versus control
-dataCM <- read.csv("./data/DEG_CM_vs_control_from_Mucciolo_TableS2.csv",
+dataCM <- read.csv("../data/DEG_CM_vs_control_from_Mucciolo_TableS2.csv",
                     header=T, stringsAsFactors = F)
 
 ################################################################################
