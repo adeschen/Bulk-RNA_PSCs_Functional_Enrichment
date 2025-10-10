@@ -271,11 +271,12 @@ p$data$nudge_x[p$data$label %in% c("regulation of axonogenesis")] <- -0.3
 p$data$nudge_x[p$data$label %in% c("regulation of axon extension")] <- -0.25
 
 ## Use ggrepel library to add the labels for the nodes
-ggg <- p + geom_text_repel(aes(x=x, y=y, label=label),
+emapFinal <- p + geom_text_repel(aes(x=x, y=y, label=label),
                 nudge_y=p$data$nudge_y, nudge_x=p$data$nudge_x,
                 min.segment.length=6, seed=121)
 
 ## Save graph
+## Beware that the results directory must be created first
 pdf("results/Figure_2C.pdf", width=8.5, height=5)
-ggg
+emapFinal
 invisible(dev.off())
