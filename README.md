@@ -4,7 +4,7 @@ This capsule contains the functional enrichment analysis conducted on the
 bulk RNA-seq PSCs from 
 [Mucciolo et al. 2024](https://doi.org/10.1016/j.ccell.2023.12.002).
 The capsule also includes the code to generate an enrichment map with the 
-selected terms of interest related to axon guidance obtained during the 
+selected terms of interest related to axon obtained during the 
 functional enrichment step.
 
 More specifically, the data used in this analysis are from [Mucciolo et al. 2024](https://doi.org/10.1016/j.ccell.2023.12.002):
@@ -12,7 +12,7 @@ More specifically, the data used in this analysis are from [Mucciolo et al. 2024
 - *Table S1.* RNA-sequencing analysis of control-treated or TGF-beta-treated PSCs - differential expression analysis (related to Figure 1).
 - *Table S2.* RNA-sequencing analysis of control-treated or CM-treated PSCs with or without ERBBi - differential expression analysis (related to Figures 2 and 3).
 
-## Authors
+### Authors 
 
 [J&eacute;r&eacute;my Nigri](https://orcid.org/0000-0003-1358-1863), [Astrid Desch&ecirc;nes](https://orcid.org/0000-0001-7846-6749) and [David A Tuveson](https://tuvesonlab.labsites.cshl.edu/)
 

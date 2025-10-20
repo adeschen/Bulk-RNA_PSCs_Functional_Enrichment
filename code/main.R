@@ -214,7 +214,10 @@ p<- ggplot2::ggplot(gg, layout=igraph::layout_with_fr) +
     geom_edge(aes(linewidth=weight), color="gray")
 
 ## The position of the "axon ensheathment" and "axonal transport" is changed
-p$data$y[p$data$y > 0.6]  <- -0.5
+p$data$y[p$data$y > 0.6]  <- -0.7
+
+p$data$x[p$data$label == "axonal transport"]  <- 11.2
+p$data$x[p$data$label == "axon ensheathment"]  <- 9
 
 ## Extract information about the pie chart distribution of the nodes
 ## from the ggplot object (1 column contains all 3 groups)
@@ -225,58 +228,80 @@ p$data$`TGFbeta Up` <- pieInfo$`TGFbeta Up`
 p$data$`TGFbeta Down` <- pieInfo$`TGFbeta Down`
 p$data$`CM Down` <- pieInfo$`CM Down`
 
-## Use scatterpie library to add the scatter pies to the graph
+## Use scatterpie library to add the scatter pies plot into the graph
 ## The size of the nodes is function of the number of genes in term
 ## coord_fixed() is used to force a 1:1 ratio
-p <- p + geom_scatterpie(aes(x=x, y=y, r=size/450),
-                cols=c("TGFbeta Up", "TGFbeta Down", "CM Down"),
-                legend_name="Cluster", color=NA) +
-    geom_scatterpie_legend(radius=c(0, 0.125, 0.25, 0.375, 0.5), n=5,
-        x=max(p$data$x)+0.3, y=min(p$data$y)-0.3,
-        labeller=function(x) {round(x*450)}, label_position="right") +
+p <- p + geom_scatterpie(aes(x=x, y=y, r=size/500),
+            cols=c("TGFbeta Up", "TGFbeta Down", "CM Down"),
+            legend_name = "Cluster", color=NA) +
+        geom_scatterpie_legend(p$data$size/500,
+            breaks=c(0, 0.1125, 0.225, 0.3375, 0.45),
+            x=max(p$data$x)+0.9, y=min(p$data$y),
+            labeller=function(x) {round(x*500)}, label_position="right") +
     coord_fixed() +
     guides(size="none") +
+    guides(linewidth=guide_legend(ncol=3)) +
     scale_linewidth_continuous(name="Similarity coefficient") +
-    theme(legend.position=c(0.87, 0.75))
+    theme(legend.position=c(0.855, 0.74),
+            legend.key.width=unit(4, "mm"),
+            legend.key.height=unit(4, "mm"),
+            legend.spacing=unit(1, "mm"))
 
 ## Update colors for the nodes
 p <- p + scale_fill_manual(name="Protocol",
             breaks=c("TGFbeta Up", "TGFbeta Down", "CM Down"),
             values=c("#c84d4c", "#3f78c1", "#28827a"),
             labels=c(expression(paste("TGF", beta, " up-regulated")),
-                    expression(paste("TGF", beta, " down-regulated")),
-                    "CM down-regulated")) +
-        theme(legend.text=element_text(size=12),
-            legend.title=element_text(size=14, face="bold"))
+                        expression(paste("TGF", beta, " down-regulated")),
+                        "CM down-regulated")) +
+        theme(legend.text=element_text(size=13),
+                legend.title=element_text(size=14, face="bold"))
 
 ## Change position of the labels
-p$data$nudge_y <- rep(-0.08, nrow(p$data))
-p$data$nudge_y[p$data$label %in% c( "axonogenesis")] <- 0.4
-p$data$nudge_y[p$data$label %in% c("axonal transport", "axon extension")] <- -0.1
-p$data$nudge_y[p$data$label %in% c("axon extension")] <- -0.12
-p$data$nudge_y[p$data$label %in% c("axon ensheathment")] <- -0.15
-p$data$nudge_y[p$data$label %in% c("axon guidance")] <- 0.25
-p$data$nudge_y[p$data$label %in% c("axon development")] <- -0.58
-p$data$nudge_y[p$data$label %in% c("positive regulation of axonogenesis")] <- -0.12
-p$data$nudge_y[p$data$label %in% c("regulation of axonogenesis")] <- -0.17
-p$data$nudge_y[p$data$label %in% c("regulation of axon extension")] <- -0.13
+p$data$nudge_y <- rep(-0.07, nrow(p$data))
+p$data$nudge_y[p$data$label == "axonogenesis"] <- 0.4
+p$data$nudge_y[p$data$label == "axon extension"] <- -0.1
+p$data$nudge_y[p$data$label == "axon extension"] <- 0.13
+p$data$nudge_y[p$data$label == "axon ensheathment"] <- -0.12
+p$data$nudge_y[p$data$label == "axon guidance"] <- -0.28
+p$data$nudge_y[p$data$label == "axon development"] <- -0.52
+p$data$nudge_y[p$data$label == "positive regulation of axonogenesis"] <- 0.225
+p$data$nudge_y[p$data$label == "regulation of axonogenesis"] <- -0.05
+p$data$nudge_y[p$data$label == "regulation of axon extension"] <- -0.09
 
 p$data$nudge_x<- rep(0, nrow(p$data))
-p$data$nudge_x[p$data$label %in% c("axonal transport")] <- -0.21
-p$data$nudge_x[p$data$label %in% c( "axonogenesis")] <- 0
-p$data$nudge_x[p$data$label %in% c("axon guidance")] <- 0.1
-p$data$nudge_x[p$data$label %in% c("positive regulation of axon extension")] <- -0.25
-p$data$nudge_x[p$data$label %in% c("positive regulation of axonogenesis")] <- -0.42
-p$data$nudge_x[p$data$label %in% c("regulation of axonogenesis")] <- -0.3
-p$data$nudge_x[p$data$label %in% c("regulation of axon extension")] <- -0.25
+p$data$nudge_x[p$data$label == "axonal transport"] <- -0.21
+p$data$nudge_x[p$data$label == "axon extension"] <- 0.02
+p$data$nudge_x[p$data$label == "axon guidance"] <- 0.1
+p$data$nudge_x[p$data$label == "axon development"] <- 0.12
+p$data$nudge_x[p$data$label == "axon ensheathment"] <- -0.1
+p$data$nudge_x[p$data$label == "positive regulation of axonogenesis"] <- -0.32
+p$data$nudge_x[p$data$label == "regulation of axonogenesis"] <- -0.3
+p$data$nudge_x[p$data$label == "regulation of axon extension"] <- -0.04
+p$data$nudge_x[p$data$label == "positive regulation of axon extension"] <- -0.2
+
+
+p$data$label[p$data$label == "regulation of axon extension"] <-
+                "regulation of axon\nextension"
+p$data$label[p$data$label == "positive regulation of axonogenesis"] <-
+                "positive regulation\nof axonogenesis"
+p$data$label[p$data$label == "regulation of axonogenesis"] <-
+                "regulation of\naxonogenesis"
+p$data$label[p$data$label == "axon guidance"] <- "axon\nguidance"
+p$data$label[p$data$label == "positive regulation of axon extension"] <-
+                "positive regulation\nof axon extension"
 
 ## Use ggrepel library to add the labels for the nodes
-emapFinal <- p + geom_text_repel(aes(x=x, y=y, label=label),
+ggg <- p + geom_text_repel(aes(x=x, y=y, label=label),
                 nudge_y=p$data$nudge_y, nudge_x=p$data$nudge_x,
-                min.segment.length=6, seed=121)
+                min.segment.length=6, seed=121, size=5.2, lineheight = 0.7)
 
-## Save graph
-## Beware that the results directory must be created first
-pdf("results/Figure_2C.pdf", width=8.5, height=5)
-emapFinal
+## Save graph in pdf
+pdf(file="results/Figure_2C.pdf", width=7, height=3.3)
+ggg
+invisible(dev.off())
+
+## Save graph in svg
+svg(filename="results/Figure_2C.svg", width=7, height=3.3)
+ggg
 invisible(dev.off())
