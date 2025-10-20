@@ -1,7 +1,8 @@
-# Functional Enrichment on PCSs Differential Expression from Mucciolo G. et al 2024
+# Functional Enrichment on PCSs Differential Expressed Genes from Mucciolo G. et al 2024
 
 This capsule contains the functional enrichment analysis conducted on the 
-bulk RNA-seq PSCs from 
+differentially expressed genes obtained from the bulk RNA-seq PSCs as 
+published in  
 [Mucciolo et al. 2024](https://doi.org/10.1016/j.ccell.2023.12.002).
 The capsule also includes the code to generate an enrichment map with the 
 selected terms of interest related to axon obtained during the 
@@ -14,7 +15,7 @@ More specifically, the data used in this analysis are from [Mucciolo et al. 2024
 
 ### Authors 
 
-[J&eacute;r&eacute;my Nigri](https://orcid.org/0000-0003-1358-1863), [Astrid Desch&ecirc;nes](https://orcid.org/0000-0001-7846-6749) and [David A Tuveson](https://tuvesonlab.labsites.cshl.edu/)
+[Astrid Desch&ecirc;nes](https://orcid.org/0000-0001-7846-6749), [J&eacute;r&eacute;my Nigri](https://orcid.org/0000-0003-1358-1863), and [David A Tuveson](https://tuvesonlab.labsites.cshl.edu/)
 
 ### Code, Data, Results
 
