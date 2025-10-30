@@ -19,11 +19,11 @@ print("Loading dataset")
 
 ## Load the data from the differential expression TGFbeta versus control
 dataTGF <- read.csv("../data/DEG_TGF_vs_control_from_Mucciolo_TableS1.csv",
-                    header=T, stringsAsFactors=FALSE)
+                        header=T, stringsAsFactors=FALSE)
 
 ## Load the data from the differential expression CM versus control
 dataCM <- read.csv("../data/DEG_CM_vs_control_from_Mucciolo_TableS2.csv",
-                   header=T, stringsAsFactors=FALSE)
+                    header=T, stringsAsFactors=FALSE)
 
 
 ################################################################################
@@ -52,18 +52,19 @@ significant_TGF_UP <-  dataTGF[which(dataTGF$FDR < 0.05 & dataTGF$logFC > 0), ]
 ## The GO electronic annotations are excluded (exclude_iea=TRUE)
 ## The evidence codes are included in the results (evcodes=TRUE)
 gostres_TGF_UP <- gost(query=list(TGFbeta_vs_ctl_UP=c(significant_TGF_UP$ensembl_gene_id)),
-                       organism="mmusculus",
-                       correction_method="g_SCS",
-                       sources=c("GO", "KEGG", "REAC", "WP"),
-                       user_threshold=0.05,
-                       custom_bg=NULL,
-                       significant=TRUE,
-                       evcodes=TRUE,
-                       exclude_iea=TRUE)
+                        organism="mmusculus",
+                        correction_method="g_SCS",
+                        sources=c("GO", "KEGG", "REAC", "WP"),
+                        user_threshold=0.05,
+                        custom_bg=NULL,
+                        significant=TRUE,
+                        evcodes=TRUE,
+                        exclude_iea=TRUE)
 
-saveRDS(object=gostres_TGF_UP, file="/results/EnrichmentTGF_Up.RDS")
-write.csv(gostres_TGF_UP$results, "/results/EnrichmentTGF_Up_summary.csv",
-          row.names=FALSE)
+saveRDS(object=gostres_TGF_UP, file="./results/EnrichmentTGF_Up.RDS")
+write.csv(as.data.frame(gostres_TGF_UP$result[, 1:13]),
+            "./results/EnrichmentTGF_Up_summary.csv",
+            row.names=FALSE, quote=TRUE)
 
 ## Remove TGF beta related dataset
 rm(significant_TGF_UP)
@@ -85,18 +86,19 @@ significant_TGF_DOWN <- dataTGF[which(dataTGF$FDR < 0.05 & dataTGF$logFC < 0), ]
 ## The GO electronic annotations are excluded (exclude_iea=TRUE)
 ## The evidence codes are included in the results (evcodes=TRUE)
 gostres_TGF_DOWN <- gost(query=list(TGFbeta_vs_ctl_DOWN=c(significant_TGF_DOWN$ensembl_gene_id)),
-                         organism="mmusculus",
-                         correction_method="g_SCS",
-                         sources=c("GO", "KEGG", "REAC", "WP"),
-                         user_threshold=0.05,
-                         custom_bg=NULL,
-                         significant=TRUE,
-                         evcodes=TRUE,
-                         exclude_iea=TRUE)
+                            organism="mmusculus",
+                            correction_method="g_SCS",
+                            sources=c("GO", "KEGG", "REAC", "WP"),
+                            user_threshold=0.05,
+                            custom_bg=NULL,
+                            significant=TRUE,
+                            evcodes=TRUE,
+                            exclude_iea=TRUE)
 
-saveRDS(object=gostres_TGF_DOWN, file="/results/EnrichmentTGF_Down.RDS")
-write.csv(gostres_TGF_DOWN$results, "/results/EnrichmentTGF_Down_summary.csv",
-          row.names=FALSE)
+saveRDS(object=gostres_TGF_DOWN, file="./results/EnrichmentTGF_Down.RDS")
+write.csv(as.data.frame(gostres_TGF_DOWN$result[, 1:13]),
+            "./results/EnrichmentTGF_Down_summary.csv",
+            row.names=FALSE, quote=TRUE)
 
 ## Remove TGF beta related dataset
 rm(significant_TGF_DOWN)
@@ -119,18 +121,19 @@ significant_CM_UP <- dataCM[which(dataCM$FDR < 0.05 & dataCM$logFC > 0), ]
 ## The GO electronic annotations are excluded (exclude_iea=TRUE)
 ## The evidence codes are included in the results (evcodes=TRUE)
 gostres_CM_UP <- gost(query=list(CM_vs_ctl_UP=c(significant_CM_UP$ensembl_gene_id)),
-                      organism="mmusculus",
-                      correction_method="g_SCS",
-                      sources=c("GO", "KEGG", "REAC", "WP"),
-                      user_threshold=0.05,
-                      custom_bg=NULL,
-                      significant=TRUE,
-                      evcodes=TRUE,
-                      exclude_iea=TRUE)
+                        organism="mmusculus",
+                        correction_method="g_SCS",
+                        sources=c("GO", "KEGG", "REAC", "WP"),
+                        user_threshold=0.05,
+                        custom_bg=NULL,
+                        significant=TRUE,
+                        evcodes=TRUE,
+                        exclude_iea=TRUE)
 
-saveRDS(object=gostres_CM_UP, file="/results/EnrichmentCM_Up.RDS")
-write.csv(gostres_CM_UP$results, "/results/EnrichmentCM_Up_summary.csv",
-          row.names=FALSE)
+saveRDS(object=gostres_CM_UP, file="./results/EnrichmentCM_Up.RDS")
+write.csv(as.data.frame(gostres_CM_UP$result[, 1:13]),
+          "./results/EnrichmentCM_Up.csv",
+          row.names=FALSE, quote=TRUE)
 
 rm(significant_CM_UP)
 
@@ -151,19 +154,20 @@ significant_CM_DOWN <- dataCM[which(dataCM$FDR < 0.05 & dataCM$logFC < 0), ]
 ## The GO electronic annotations are excluded (exclude_iea=TRUE)
 ## The evidence codes are included in the results (evcodes=TRUE)
 gostres_CM_DOWN <- gost(query=list(CM_vs_ctl_DOWN=c(significant_CM_DOWN$ensembl_gene_id)),
-                        organism="mmusculus",
-                        correction_method="g_SCS",
-                        sources=c("GO", "KEGG", "REAC", "WP"),
-                        user_threshold=0.05,
-                        custom_bg=NULL,
-                        significant=TRUE,
-                        evcodes=TRUE,
-                        exclude_iea=TRUE)
+                            organism="mmusculus",
+                            correction_method="g_SCS",
+                            sources=c("GO", "KEGG", "REAC", "WP"),
+                            user_threshold=0.05,
+                            custom_bg=NULL,
+                            significant=TRUE,
+                            evcodes=TRUE,
+                            exclude_iea=TRUE)
 
-
-saveRDS(object=gostres_CM_DOWN, file="/results/EnrichmentCM_Down.RDS")
-write.csv(gostres_CM_DOWN$results, "/results/EnrichmentCM_Down_summary.csv",
-          row.names=FALSE)
+saveRDS(object=gostres_CM_DOWN, file="./results/EnrichmentCM_Down.RDS")
+w
+write.csv(as.data.frame(gostres_CM_DOWN$result[, 1:13]),
+          "./results/EnrichmentCM_Down.csv",
+          row.names=FALSE, quote=TRUE)
 
 rm(significant_CM_DOWN)
 rm(dataCM)
@@ -185,7 +189,8 @@ print("Generate enrichment map")
 ## GO:0008366  GO:BP                     axon ensheathment
 ## GO:0098930  GO:BP                      axonal transport
 ## GO:0007411  GO:BP                         axon guidance
-selected_terms <- c("GO:0061564", "GO:0007409", "GO:0050770", "GO:0050772",
+selected_terms <- c("GO:0061564", "GO:0007409",
+                    "GO:0050770", "GO:0050772",
                     "GO:0048675", "GO:0030516", "GO:0045773",
                     "GO:0008366", "GO:0098930", "GO:0007411")
 
@@ -196,14 +201,14 @@ termsIDs <- paste0(selected_terms, collapse=",")
 ## Minimum similarity to have a link present is set to 0.2
 gg <- enrichViewNet::createEnrichMapMultiComplexAsIgraph(
     gostObjectList=list(gostres_TGF_UP, gostres_TGF_DOWN,
-                        gostres_CM_DOWN),
+                            gostres_CM_DOWN),
     queryInfo=data.frame(queryName=c("TGFbeta_vs_ctl_UP",
-                                       "TGFbeta_vs_ctl_DOWN", "CM_vs_ctl_DOWN"),
-                           source=c("TERM_ID", "TERM_ID", "TERM_ID"),
-                           removeRoot=c(TRUE, TRUE, TRUE),
-                           termIDs=c(termsIDs, termsIDs, termsIDs),
-                           groupName=c("TGFbeta Up", "TGFbeta Down", "CM Down"),
-                           stringsAsFactors=FALSE),
+                                     "TGFbeta_vs_ctl_DOWN", "CM_vs_ctl_DOWN"),
+                         source=c("TERM_ID", "TERM_ID", "TERM_ID"),
+                         removeRoot=c(TRUE, TRUE, TRUE),
+                         termIDs=c(termsIDs, termsIDs, termsIDs),
+                         groupName=c("TGFbeta Up", "TGFbeta Down", "CM Down"),
+                         stringsAsFactors=FALSE),
     similarityCutOff=0.2)
 
 set.seed(612)
@@ -233,11 +238,11 @@ p$data$`CM Down` <- pieInfo$`CM Down`
 ## coord_fixed() is used to force a 1:1 ratio
 p <- p + geom_scatterpie(aes(x=x, y=y, r=size/500),
             cols=c("TGFbeta Up", "TGFbeta Down", "CM Down"),
-            legend_name = "Cluster", color=NA) +
-        geom_scatterpie_legend(p$data$size/500,
-            breaks=c(0, 0.1125, 0.225, 0.3375, 0.45),
-            x=max(p$data$x)+0.9, y=min(p$data$y),
-            labeller=function(x) {round(x*500)}, label_position="right") +
+            legend_name="Cluster", color=NA) +
+    geom_scatterpie_legend(p$data$size/500,
+        breaks=c(0, 0.1125, 0.225, 0.3375, 0.45),
+        x=max(p$data$x)+0.9, y=min(p$data$y),
+        labeller=function(x) {round(x*500)}, label_position="right") +
     coord_fixed() +
     guides(size="none") +
     guides(linewidth=guide_legend(ncol=3)) +
@@ -254,8 +259,8 @@ p <- p + scale_fill_manual(name="Protocol",
             labels=c(expression(paste("TGF", beta, " up-regulated")),
                         expression(paste("TGF", beta, " down-regulated")),
                         "CM down-regulated")) +
-        theme(legend.text=element_text(size=13),
-                legend.title=element_text(size=14, face="bold"))
+    theme(legend.text=element_text(size=13),
+            legend.title=element_text(size=14, face="bold"))
 
 ## Change position of the labels
 p$data$nudge_y <- rep(-0.07, nrow(p$data))
@@ -282,26 +287,26 @@ p$data$nudge_x[p$data$label == "positive regulation of axon extension"] <- -0.2
 
 
 p$data$label[p$data$label == "regulation of axon extension"] <-
-                "regulation of axon\nextension"
+    "regulation of axon\nextension"
 p$data$label[p$data$label == "positive regulation of axonogenesis"] <-
-                "positive regulation\nof axonogenesis"
+    "positive regulation\nof axonogenesis"
 p$data$label[p$data$label == "regulation of axonogenesis"] <-
-                "regulation of\naxonogenesis"
+    "regulation of\naxonogenesis"
 p$data$label[p$data$label == "axon guidance"] <- "axon\nguidance"
 p$data$label[p$data$label == "positive regulation of axon extension"] <-
-                "positive regulation\nof axon extension"
+    "positive regulation\nof axon extension"
 
 ## Use ggrepel library to add the labels for the nodes
 ggg <- p + geom_text_repel(aes(x=x, y=y, label=label),
-                nudge_y=p$data$nudge_y, nudge_x=p$data$nudge_x,
-                min.segment.length=6, seed=121, size=5.2, lineheight = 0.7)
+            nudge_y=p$data$nudge_y, nudge_x=p$data$nudge_x,
+            min.segment.length=6, seed=121, size=5.2, lineheight = 0.7)
 
 ## Save graph in pdf
-pdf(file="results/Figure_2C.pdf", width=7, height=3.3)
+pdf(file="./results/Figure_2C.pdf", width=7, height=3.3)
 ggg
 invisible(dev.off())
 
 ## Save graph in svg
-svg(filename="results/Figure_2C.svg", width=7, height=3.3)
+svg(filename="./results/Figure_2C.svg", width=7, height=3.3)
 ggg
 invisible(dev.off())
