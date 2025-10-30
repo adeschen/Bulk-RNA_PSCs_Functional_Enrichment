@@ -164,7 +164,6 @@ gostres_CM_DOWN <- gost(query=list(CM_vs_ctl_DOWN=c(significant_CM_DOWN$ensembl_
                             exclude_iea=TRUE)
 
 saveRDS(object=gostres_CM_DOWN, file="./results/EnrichmentCM_Down.RDS")
-w
 write.csv(as.data.frame(gostres_CM_DOWN$result[, 1:13]),
           "./results/EnrichmentCM_Down.csv",
           row.names=FALSE, quote=TRUE)
