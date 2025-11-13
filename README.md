@@ -2,7 +2,7 @@
 
 This capsule contains the functional enrichment analysis conducted on the 
 differentially expressed genes obtained from the bulk RNA-seq PSCs as 
-published in  
+published in 
 [Mucciolo et al. 2024](https://doi.org/10.1016/j.ccell.2023.12.002).
 The capsule also includes the code to generate an enrichment map with the 
 selected terms of interest related to axon obtained during the 
